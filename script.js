@@ -1,6 +1,3 @@
-//import a thing that lets you save to a txt file
-src="js/FileSaver.js"
-
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
@@ -18,15 +15,14 @@ var notesList = $('ul#notes');
 
 var noteContent = '';
 
+// Get all notes from previous sessions and display them.
+var notes = getAllNotes();
+renderNotes(notes);
 
-		function saveDynamicDataToFile() {
-      var userInput = document.getElementById("myText").value;
-      var blob = new Blob([userInput], { type: "text/plain;charset=utf-8" });
-      saveAs(blob, "dynamic.txt");
-    }
+
 
 /*-----------------------------
-      Voice Recognition https://tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript
+      Voice Recognition
 ------------------------------*/
 
 // If false, the recording will stop after a few seconds of silence.
@@ -38,7 +34,8 @@ recognition.continuous = true;
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far. We only need the current one.
+  // It holds all the lines we have captured so far.
+  // We only need the current one.
   var current = event.resultIndex;
 
   // Get a transcript of what was said.
@@ -48,6 +45,7 @@ recognition.onresult = function(event) {
   // There is a weird bug on mobile, where everything is repeated twice.
   // There is no official solution so far so we have to handle an edge case.
   var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+
   if(!mobileRepeatBug) {
     noteContent += transcript;
     noteTextarea.val(noteContent);
@@ -59,7 +57,7 @@ recognition.onstart = function() {
 }
 
 recognition.onspeechend = function() {
-  instructions.text('You were quiet for a while so voice recognition turned itself off.');
+  instructions.text('Click save note to end.');
 }
 
 recognition.onerror = function(event) {
@@ -73,6 +71,7 @@ recognition.onerror = function(event) {
 /*-----------------------------
       App buttons and input
 ------------------------------*/
+
 $('#start-record-btn').on('click', function(e) {
   if (noteContent.length) {
     noteContent += ' ';
@@ -80,7 +79,8 @@ $('#start-record-btn').on('click', function(e) {
   recognition.start();
 });
 
-$('#pause-record-btn').on('click', function(e)){
+
+$('#pause-record-btn').on('click', function(e) {
   recognition.stop();
   instructions.text('Voice recognition paused.');
 });
@@ -90,7 +90,7 @@ noteTextarea.on('input', function() {
   noteContent = $(this).val();
 })
 
-$('#save-note-btn').on('click', function(e), "saveDynamicDataToFile();" {
+$('#save-note-btn').on('click', function(e) {
   recognition.stop();
 
   if(!noteContent.length) {
@@ -115,6 +115,11 @@ notesList.on('click', function(e) {
   e.preventDefault();
   var target = $(e.target);
 
+  // Listen to the selected note.
+  if(target.hasClass('listen-note')) {
+    var content = target.closest('.note').find('.content').text();
+    readOutLoud(content);
+  }
 
   // Delete note.
   if(target.hasClass('delete-note')) {
@@ -124,9 +129,29 @@ notesList.on('click', function(e) {
   }
 });
 
+
+
+/*-----------------------------
+      Speech Synthesis
+------------------------------*/
+
+function readOutLoud(message) {
+	var speech = new SpeechSynthesisUtterance();
+
+  // Set the text and voice attributes.
+	speech.text = message;
+	speech.volume = 1;
+	speech.rate = 1;
+	speech.pitch = 1;
+
+	window.speechSynthesis.speak(speech);
+}
+
+
+
 /*-----------------------------
       Helper Functions
-
+------------------------------*/
 
 function renderNotes(notes) {
   var html = '';
@@ -146,9 +171,14 @@ function renderNotes(notes) {
     html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
   }
   notesList.html(html);
-}------------------------------*/
+}
 
 
 function saveNote(dateTime, content) {
   localStorage.setItem('note-' + dateTime, content);
+}
+
+
+function deleteNote(dateTime) {
+  localStorage.removeItem('note-' + dateTime);
 }
