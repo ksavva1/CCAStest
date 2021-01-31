@@ -1,0 +1,39 @@
+body{
+ background-color: white;
+ font-family: helvetica;
+}h1{
+ color: black;
+ background-color: #ebebeb;
+ text-align: center;
+ font: 200% helvetica;
+ font-weight: bold;
+ padding: 18px;
+}p,a:link,a:visited,input,{
+ color: black;
+ text-align: left;
+ border: 3px;
+}button.accordion {
+  background-color: #ebebeb;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}div.panel{
+  padding: 0 18px;
+  display: none;
+}input:focus {
+	border-color: #008b9e;
+	outline: none;
+}.button{
+	background-color: #ebebeb;
+	border-radius: 40px/50px;
+  border: none;
+	padding: 5px;
+	text-align: center;
+	height: auto;
+	margin-top: 30px;
+	margin: 0 auto;
+}.button:hover{
+	background-color: #008b9e;
+}

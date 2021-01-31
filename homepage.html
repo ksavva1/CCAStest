@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>homepage.html</title>
+		<link rel = "stylesheet" type = "text/css" href = "style.css" />
+	</head>
+
+	<body>
+		<h1>CCAS Test</h1>
+
+		<button type="button" class="button" onclick="window.location.href='file:///Users/katiesavva/Desktop/Website/logIn.html'">Log In</button><br><br>
+		<button type="button" class="button" onclick="window.location.href='file:///Users/katiesavva/Desktop/Website/signUp.html'">Sign Up</button><br><br>
+
+		<button class="accordion">Test 1</button>
+		<div class="panel">
+		  <p>Put link and description of first test here</p>
+			<button type="button" class="button" onclick="window.location.href='file:///Users/katiesavva/Desktop/Website/test1.html'">Go to test 1</button><br><br>
+		</div>
+
+		<button class="accordion">Test 2</button>
+		<div class="panel">
+		  <p>Put link and description of second test here</p>
+			<button type="button" class="button" onclick="window.location.href='file:///Users/katiesavva/Desktop/Website/test2.html'">Go to test 2</button><br><br>
+		</div>
+
+		<button class="accordion">Test 3</button>
+		<div class="panel">
+		  <p>Put link and description of third test here</p>
+			<button type="button" class="button" onclick="window.location.href='file:///Users/katiesavva/Desktop/Website/test3.html'">Go to test 3</button><br><br>
+		</div>
+
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+			for (i = 0; i < acc.length; i++) {
+				acc[i].onclick = function(){
+					this.classList.toggle("active");
+					var panel = this.nextElementSibling;
+					if (panel.style.display === "block") {
+						panel.style.display = "none";
+					}else {
+						panel.style.display = "block";
+					}}}
+		</script>
+	</body>
+
+</html>
