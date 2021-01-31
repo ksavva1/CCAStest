@@ -57,7 +57,7 @@ recognition.onstart = function() {
 }
 
 recognition.onspeechend = function() {
-  instructions.text('Click save note to end.');
+  instructions.text('Voice recognition stopped.');
 }
 
 recognition.onerror = function(event) {
@@ -176,6 +176,23 @@ function renderNotes(notes) {
 
 function saveNote(dateTime, content) {
   localStorage.setItem('note-' + dateTime, content);
+}
+
+
+function getAllNotes() {
+  var notes = [];
+  var key;
+  for (var i = 0; i < localStorage.length; i++) {
+    key = localStorage.key(i);
+
+    if(key.substring(0,5) == 'note-') {
+      notes.push({
+        date: key.replace('note-',''),
+        content: localStorage.getItem(localStorage.key(i))
+      });
+    }
+  }
+  return notes;
 }
 
 

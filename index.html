@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Voice recognition</title>
-    <link rel = "stylesheet" type = "text/css" href = "style.css" />
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Digit Span Tests</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body>
-    <div class="app">
-        <h1>Voice Recognition</h1>
-        <div class="input-single">
-            <textarea id="note-textarea" placeholder="Text from speech will appear here." rows="6"></textarea>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <div class="container">
+
+            <h1>Digit Span Tests</h1>
+            <div class="app">
+                <h3>Add New Note</h3>
+                <div class="input-single">
+                    <textarea id="note-textarea" placeholder="Your speech will appear as text here" rows="6"></textarea>
+                </div>
+                <button id="start-record-btn" title="Start Recording">Start Recognition</button>
+                <button id="pause-record-btn" title="Pause Recording">Stop Recognition</button>
+                <button id="save-note-btn" title="Save Note">Save Note</button>
+                <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+
+                <h3>My Notes</h3>
+                <ul id="notes">
+                    <li>
+                        <p class="no-notes">You don't have any notes.</p>
+                    </li>
+                </ul>
+
+            </div>
+
         </div>
-        <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-        <!--<button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>-->
-        <button id="save-note-btn" title="Save Note">Save Note</button>
-        <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="script.js"></script>
 
-</body>
+    </body>
 </html>
