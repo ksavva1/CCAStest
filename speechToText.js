@@ -8,7 +8,6 @@ catch(e) {
   $('.app').hide();
 }
 
-
 var noteTextarea = $('#note-textarea');
 var instructions = $('#recording-instructions');
 var notesList = $('ul#notes');
@@ -18,8 +17,6 @@ var noteContent = '';
 // Get all notes from previous sessions and display them.
 var notes = getAllNotes();
 renderNotes(notes);
-
-
 
 /*-----------------------------
       Voice Recognition
@@ -66,8 +63,6 @@ recognition.onerror = function(event) {
   };
 }
 
-
-
 /*-----------------------------
       App buttons and input
 ------------------------------*/
@@ -78,7 +73,6 @@ $('#start-record-btn').on('click', function(e) {
   }
   recognition.start();
 });
-
 
 $('#pause-record-btn').on('click', function(e) {
   recognition.stop();
@@ -129,8 +123,6 @@ notesList.on('click', function(e) {
   }
 });
 
-
-
 /*-----------------------------
       Speech Synthesis
 ------------------------------*/
@@ -146,8 +138,6 @@ function readOutLoud(message) {
 
 	window.speechSynthesis.speak(speech);
 }
-
-
 
 /*-----------------------------
       Helper Functions
@@ -172,7 +162,6 @@ function renderNotes(notes) {
   }
   notesList.html(html);
 }
-
 
 function saveNote(dateTime, content) {
   localStorage.setItem('note-' + dateTime, content);
