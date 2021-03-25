@@ -74,6 +74,7 @@
 
 		  const handleSuccess = function(stream) {
 		    const options = {mimeType: 'audio/webm'};
+				//array to hold recorded data
 		    const recordedChunks = [];
 		    const mediaRecorder = new MediaRecorder(stream, options);
 
