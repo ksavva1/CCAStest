@@ -8,12 +8,10 @@
 	<body>
 		<h1>Speech to text v4</h1>
 		<script>
-
-			'use strict'
-			import React, { Component } from 'react'
+			//'use strict'
+			//import React, { Component } from 'react'
 
 			//SPEECH RECOGNITION SETUP
-
 			const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 			const recognition = new SpeechRecognition()
 
@@ -22,9 +20,7 @@
 			recognition.lang = 'en-GB'
 
 			//COMPONENT
-
-			class Speech extends Component {
-
+			class Speech extends Component{
 			  constructor() {
 			    super()
 			    this.state = {
@@ -55,9 +51,8 @@
 					      recognition.onend = () => {
 					        console.log("Stopped listening per click")
 					      }
-					    }
 
-					    recognition.onstart = () => {
+					    } recognition.onstart = () => {
 					      console.log("Listening!")
 					    }
 
@@ -66,28 +61,14 @@
 					      let interimTranscript = ''
 
 					      for (let i = event.resultIndex; i < event.results.length; i++) {
-					        const transcript = event.results[i][0].transcript;
-					        if (event.results[i].isFinal) finalTranscript += transcript + ' ';
-					        else interimTranscript += transcript;
+					      	const transcript = event.results[i][0].transcript;
+					      	if (event.results[i].isFinal) finalTranscript += transcript + ' ';
+					      	else interimTranscript += transcript;
 					      }
 					      document.getElementById('interim').innerHTML = interimTranscript
 					      document.getElementById('final').innerHTML = finalTranscript }
 
-			  render() {
-			    return (
-			      <div style={container}>
-			        <button id='microphone-btn' style={button} onClick={this.toggleListen} />
-			        <div id='interim' style={interim}></div>
-			        <div id='final' style={final}></div>
-			      </div>
-			    )
-			  }
-			}
-
-			export default Speech
-
-		//-------------------------COMMANDS------------------------------------
-
+					//COMMANDS
 		      const transcriptArr = finalTranscript.split(' ')
 		      const stopCmd = transcriptArr.slice(-3, -1)
 		      console.log('stopCmd', stopCmd)
@@ -98,12 +79,8 @@
 		          console.log('Stopped listening per command')
 		          const finalText = transcriptArr.slice(0, -3).join(' ')
 		          document.getElementById('final').innerHTML = finalText
-		        }
-		      }
+		        }}
 		    }
-
-		  //-----------------------------------------------------------------------
-
 		    recognition.onerror = event => {
 		      console.log("Error occurred in recognition: " + event.error)
 		    }
@@ -118,9 +95,7 @@
 		        <div id='final' style={final}></div>
 		      </div>
 		    )
-		  }
-		}
-
+		  }}
 		export default Speech
 
 //Style
@@ -153,9 +128,8 @@ const styles = {
     width: '300px'
   }
 }
-
 const { container, button, interim, final } = styles
 		</script>
-
+<button id="button" onclick="toggleListen()">BUTTON</button>
   </body>
 </html>
