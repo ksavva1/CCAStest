@@ -9,15 +9,9 @@ const Dictaphone = () => {
   }
 
   return (
-    function start(){
-      alert("start");
-    }window.onload = function() {
-      var btn = document.getElementById("start");
-      btn.onclick = start;
-      }
-      //<button onClick={SpeechRecognition.startListening}>Start</button>
-      //<button onClick={SpeechRecognition.stopListening}>Stop</button>
-      //<button onClick={resetTranscript}>Reset</button>
+      <button onClick={SpeechRecognition.startListening}>Start</button>
+      <button onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button onClick={resetTranscript}>Reset</button>
       <p>{transcript}</p>
     </div>
   )
