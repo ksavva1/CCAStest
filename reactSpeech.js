@@ -2,33 +2,26 @@ import React from 'react'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
 const Dictaphone = () => {
-  const { transcript, resetTranscript } = useSpeechRecognition()
+  const { transcript, resetTranscript } = useSpeechRecognition();
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null
   }
 
-  return (
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button>
-      <p>{transcript}</p>
-    </div>
-  )
+  return(
+    $('#startRecord').on('click', function(e) {
+      //call this onclick of start button. Need continuous or it'll stop listening when user stops speaking.
+      SpeechRecognition.startListening({ continuous: true });
+
+  });
+    $('#stopRecord').on('click', function(e) {
+      //asynchronous. Will finish processing speech recorded up until onClick
+      SpeechRecognition.stopListening();
+    });
 }
-export default Dictaphone
+export default Dictaphone;
 
 /* stuff to show if not supported on the user's browser
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
       Render some fallback content
      }*/
-
-//call this onclick of start button. Need continuous or it'll stop listening when user stops speaking.
-SpeechRecognition.startListening({ continuous: true })
-
-//call this onclick of stop button
-SpeechRecognition.stopListening()
-
-/*
-To make the microphone transcript available in your component, add:
-const { transcript } = useSpeechRecognition() */
